@@ -11,6 +11,7 @@ let l1 = 0.05;
 let t3 = 9;
 let t4 = t3/3;
 let l3 = 0.15;
+let ag = -0.01;
 
 
 function setup(shaders)
@@ -32,7 +33,6 @@ function setup(shaders)
     let zoom = 1.0;
 
     /** Model parameters */
-    let ag = 0;
     let rg = 0;
     let rb = 0;
     let rc = 0;
@@ -258,30 +258,24 @@ function setup(shaders)
     function Claw()
     {
         multRotationY(rg)
-        // Fist
-        pushMatrix();
-            multScale([0.2, 0.05, 0.2]);
-            multTranslation([0, -0.5, 0]);
+        multRotationX(180)
+        multTranslation([0, 0.7, -1.125]);    
+        // Base
+            pushMatrix();
+                multScale([0.15, 0.01, 0.15]);
+                multTranslation([0, -0.5, 0]);
+                uploadModelView();
+                CUBE.draw(gl, program, mode);
+                popMatrix();
+        // Cylinder 
+            pushMatrix();
+                multTranslation([ag, 0, 0]);
+                multScale([0.01, 0.1, 0.01]);
+                multTranslation([0.5, 0.5, 0]);
 
-            uploadModelView();
-            CYLINDER.draw(gl, program, mode);
-        popMatrix();
-        // Maxilla 1
-        pushMatrix();
-            multTranslation([ag, 0, 0]);
-            multScale([0.02, 0.15, 0.1]);
-            multTranslation([0.5, 0.5, 0]);
-
-            uploadModelView();
-            CUBE.draw(gl, program, mode);
-        popMatrix();
-        // Maxilla 2
-        multTranslation([-ag, 0, 0]);
-        multScale([0.02, 0.15, 0.1]);
-        multTranslation([-0.5, 0.5, 0]);
-
-        uploadModelView();
-        CUBE.draw(gl, program, mode);
+                uploadModelView();
+                CYLINDER.draw(gl, program, mode);
+            popMatrix();
     }
 
     function RobotArm() 
