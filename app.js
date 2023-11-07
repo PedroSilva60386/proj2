@@ -69,12 +69,6 @@ function setup(shaders)
             case 'o':
                 ag = Math.max(0, ag - 0.005);
                 break;
-            case 'q':
-                rg += 1;
-                break;
-            case 'e':
-                rg -= 1;
-                break;
             case 'w':
                 rc = Math.min(120, rc+1);
                 break;
@@ -257,7 +251,6 @@ function setup(shaders)
 
     function Claw()
     {
-        multRotationY(rg)
         multRotationX(180)
         multTranslation([0, 0.7, -1.125]);    
         // Base
