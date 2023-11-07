@@ -203,6 +203,17 @@ function setup(shaders)
             }
         }
         drawTrianglesCrane();
+        counterWeight();
+    }
+
+    function counterWeight(){
+        pushMatrix()
+            multScale([0.15, 0.078, 0.15]);
+            multTranslation([0, -3.7, -1.5]);
+            uploadModelView();
+            CUBE.draw(gl, program, mode);
+        popMatrix() 
+
     }
 
     function drawTrianglesCrane(){
