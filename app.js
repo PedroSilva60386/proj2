@@ -201,7 +201,7 @@ function setup(shaders)
                 pushMatrix();
                     multTranslation([0, t2*l2+0.075, t4*l2-0.025]);
                     multRotationX(90);
-                    multScale([0.001, t3*l3+(t4)*0.05, 0.001]);
+                    multScale([0.001, t3*l3+t4*l3, 0.001]);
                     uploadModelView();
                     CUBE.draw(gl, program, mode);
                 popMatrix();
@@ -210,7 +210,7 @@ function setup(shaders)
                 pushMatrix();
                     multTranslation([0.025, t2*l2+0.025, t4*l2-0.025]);
                     multRotationX(90);
-                    multScale([0.001, t3*l3+(t4)*0.05, 0.001]);
+                    multScale([0.001, t3*l3+t4*l3, 0.001]);
                     uploadModelView();
                     CUBE.draw(gl, program, mode);
                 popMatrix();
@@ -219,7 +219,7 @@ function setup(shaders)
                 pushMatrix();
                     multTranslation([-0.025, t2*l2+0.025, t4*l2-0.025]);
                     multRotationX(90);
-                    multScale([0.001, t3*l3+(t4)*0.05, 0.001]);
+                    multScale([0.001, t3*l3+t4*l3, 0.001]);
                     uploadModelView();
                     CUBE.draw(gl, program, mode);
                 popMatrix();
@@ -231,8 +231,8 @@ function setup(shaders)
 
     function counterWeight(){
         pushMatrix()
-            multScale([0.15, 0.078, 0.15]);
-            multTranslation([0, -3.65, -1.5]);
+            multTranslation([0,t2*l2,-(t4-1)*l2])
+            multScale([l2, l2, l2]);
             uploadModelView();
             CUBE.draw(gl, program, mode);
         popMatrix() 
