@@ -184,7 +184,6 @@ function setup(shaders)
         pushMatrix();
             LowerArm();
         popMatrix();
-        multTranslation([0, 0.45, 0]);
         Claw();
     }
 
@@ -275,19 +274,19 @@ function setup(shaders)
     }
     function Claw()
     {
-        multRotationX(180)
-        multTranslation([0, 0.7, -1.125]);    
+        multRotationX(180)  
         // Base
             pushMatrix();
-                multScale([0.15, 0.01, 0.15]);
-                multTranslation([0, -0.5, 0]);
+                multTranslation([0, -(t2*l2+0.025), -(t3-1)*l3]);
+                multScale([l2, 0.01, l2]);
                 uploadModelView();
                 CUBE.draw(gl, program, mode);
                 popMatrix();
         // Cylinder 
             pushMatrix();
                 multTranslation([0,ag, 0]);
-                multScale([0.01, 0.1, 0.01]);
+                multTranslation([0,-(t2*l2+0.01), -(t3-1)*l3]);
+                multScale([0.001, l2, 0.001]);
                 multTranslation([0.25, 0.5, 0]);
 
                 uploadModelView();
