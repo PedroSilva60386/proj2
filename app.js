@@ -281,12 +281,18 @@ function setup(shaders)
                 multScale([l2, 0.01, l2]);
                 uploadModelView();
                 CUBE.draw(gl, program, mode);
-                popMatrix();
+            popMatrix();
         // Cylinder 
             pushMatrix();
-                multTranslation([0,ag, 0]);
-                multTranslation([0,-(t2*l2), -(t3-1)*l3]);
-                multScale([0.001, l2+ag, 0.001]);
+                //multTranslation([0,ag, 0]);
+                if(ag == 0){
+                    multTranslation([0,-(t2*l2), -(t3-1)*l3]);
+                    multScale([0.001, l2+ag, 0.001]);
+                }else{
+                    multTranslation([0,-(t2*l2)+0.0025, -(t3-1)*l3]);
+                    multScale([0.001, l2+ag, 0.001]);
+                }
+             
                 
                 uploadModelView();
                 CYLINDER.draw(gl, program, mode);
