@@ -20,7 +20,7 @@ let t3 = 12;
 let e3 = 0;
 let l3 = l1;
 let t4 = t3/3;
-let ag = -0.01;
+let ag = 0;
 
 function toggleMode(state){
     state = !state;
@@ -85,7 +85,7 @@ function setup(shaders)
                 ag = Math.max(0, ag - 0.005);
                 break;
             case 's':
-                ag = Math.min(0.050, ag + 0.005);
+                ag = Math.min(t2*l2, ag + 0.005);
                 break;
             case 'i':
                 t2++;
@@ -285,10 +285,9 @@ function setup(shaders)
         // Cylinder 
             pushMatrix();
                 multTranslation([0,ag, 0]);
-                multTranslation([0,-(t2*l2+0.01), -(t3-1)*l3]);
-                multScale([0.001, l2, 0.001]);
-                multTranslation([0.25, 0.5, 0]);
-
+                multTranslation([0,-(t2*l2), -(t3-1)*l3]);
+                multScale([0.001, l2+ag, 0.001]);
+                
                 uploadModelView();
                 CYLINDER.draw(gl, program, mode);
             popMatrix();
