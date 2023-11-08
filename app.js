@@ -41,9 +41,7 @@ function setup(shaders)
     let zoom = 1.0;
 
     /** Model parameters */
-    let rg = 0;
     let rb = 0;
-    let rc = 0;
 
     resize_canvas();
     window.addEventListener("resize", resize_canvas);
@@ -66,7 +64,7 @@ function setup(shaders)
                 break;
             case '2':
                 // Top view
-                mView = lookAt([0,1.6,0],  [0,0.6,0], [0,0,-1]);
+                mView = lookAt([0,1.6,0],  [0,0.6,0], [-1000,0,-1]);
                 break;
             case '3':
                 // Right view
@@ -75,32 +73,36 @@ function setup(shaders)
             case '4':
                 mView = lookAt([2, 1.2, 1], [0, 0.6, 0], [0, 1, 0]);
                 break;
-            case 'p':
-                ag = Math.min(0.050, ag + 0.005);
+            case 'r':
+                zoom = 1.0;
                 break;
-            case 'o':
-                ag = Math.max(0, ag - 0.005);
-                break;
-            case 'q':
-                rg += 1;
-                break;
-            case 'e':
-                rg -= 1;
             case 'w':
                 ag = Math.max(0, ag - 0.005);
                 break;
             case 's':
                 ag = Math.min(0.050, ag + 0.005);
                 break;
-            case 'a':
-                rb -= 1;
-                break;
             case 'i':
                 break;
             case 'k':
                 break;
+            case 'j':
+                break;
+            case 'l':
+                break;
+            case 'a':
+                rb -= 1;
+                break;
             case 'd':
                 rb += 1;
+                break;
+            case 'ArrowLeft':
+                break;
+            case 'ArrowRight':
+                break;
+            case 'ArrowUp':
+                break;
+            case 'ArrowDown':
                 break;
             case '+':
                 zoom /= 1.1;
@@ -172,7 +174,6 @@ function setup(shaders)
 
     function LowerArmAndClaw()
     {
-        multRotationZ(rc);
         pushMatrix();
             LowerArm();
         popMatrix();
@@ -285,7 +286,7 @@ function setup(shaders)
             pushMatrix();
                 multTranslation([0,ag, 0]);
                 multScale([0.01, 0.1, 0.01]);
-                multTranslation([0.5, 0.5, 0]);
+                multTranslation([0.25, 0.5, 0]);
 
                 uploadModelView();
                 CYLINDER.draw(gl, program, mode);
