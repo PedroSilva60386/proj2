@@ -75,10 +75,6 @@ function setup(shaders)
             case '4':
                 mView = lookAt([2, 1.2, 1], [0, 0.6, 0], [0, 1, 0]);
                 break;
-            case '9':
-                mode = gl.LINES; 
-                break;
-<<<<<<< HEAD
             case 'p':
                 ag = Math.min(0.050, ag + 0.005);
                 break;
@@ -90,11 +86,6 @@ function setup(shaders)
                 break;
             case 'e':
                 rg -= 1;
-=======
-            case '0':
-                mode = gl.TRIANGLES;
->>>>>>> 4b6fc9e47444d73d3a1785309ee017248cd24223
-                break;
             case 'w':
                 ag = Math.max(0, ag - 0.005);
                 break;
