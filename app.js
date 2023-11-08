@@ -16,7 +16,7 @@ let e1 = 0;
 let t2 = t1;
 let l2 = l1;
 let e2 = 0;
-let t3 = 9;
+let t3 = 12;
 let e3 = 0;
 let l3 = l1;
 let t4 = t3/3;
@@ -199,27 +199,27 @@ function setup(shaders)
         for(let i = 0; i<3; i++){
             if(i == 0){
                 pushMatrix();
-                    multTranslation([0, t2*l2+0.075, t4*l2]);
+                    multTranslation([0, t2*l2+0.075, t4*l2-0.025]);
                     multRotationX(90);
-                    multScale([0.001, t3*l3+(t4-1)*0.05, 0.001]);
+                    multScale([0.001, t3*l3+(t4)*0.05, 0.001]);
                     uploadModelView();
                     CUBE.draw(gl, program, mode);
                 popMatrix();
             }
             if(i == 1){
                 pushMatrix();
-                    multTranslation([-0.075, 0, 0.375]);
+                    multTranslation([0.025, t2*l2+0.025, t4*l2-0.025]);
                     multRotationX(90);
-                    multScale([0.001, 1.65, 0.001]);
+                    multScale([0.001, t3*l3+(t4)*0.05, 0.001]);
                     uploadModelView();
                     CUBE.draw(gl, program, mode);
                 popMatrix();
             }
             if(i == 2){
                 pushMatrix();
-                    multTranslation([0, 0, 0.375]);
+                    multTranslation([-0.025, t2*l2+0.025, t4*l2-0.025]);
                     multRotationX(90);
-                    multScale([0.001, 1.65, 0.001]);
+                    multScale([0.001, t3*l3+(t4)*0.05, 0.001]);
                     uploadModelView();
                     CUBE.draw(gl, program, mode);
                 popMatrix();
@@ -242,7 +242,7 @@ function setup(shaders)
     function drawTrianglesCrane(){
         let z = 0;
         let i = 0;
-        let x = 0;
+        
         while(i!=t3){
             if(i == 0){
                 pushMatrix();
@@ -263,18 +263,16 @@ function setup(shaders)
             }
         }
         z = 0;
-        while(x!=t4){
+        for(let x = 0; x<=t4;x++){
             pushMatrix();
                 multTranslation([0, t2*l2+l2, z-=l3]);
                 multScale([l2, l2, l2]);
                 uploadModelView();
                 TRIANGLES.draw(gl, program, mode);
             popMatrix();
-            x++;
         }
+
     }
-
-
     function Claw()
     {
         multRotationX(180)
