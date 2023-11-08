@@ -16,7 +16,7 @@ let e1 = 0;
 let t2 = t1;
 let l2 = l1;
 let e2 = 0;
-let t3 = 9;
+let t3 = 12;
 let e3 = 0;
 let l3 = l1;
 let t4 = t3/3;
@@ -199,9 +199,9 @@ function setup(shaders)
         for(let i = 0; i<3; i++){
             if(i == 0){
                 pushMatrix();
-                    multTranslation([0, t2*l2+0.075, 0.15]);
+                    multTranslation([0, t2*l2+0.075, 0.2]);
                     multRotationX(90);
-                    multScale([0.001, (t3)*l3+(2*0.05), 0.001]);
+                    multScale([0.001, t3*l3+(t4-1)*0.05, 0.001]);
                     uploadModelView();
                     CUBE.draw(gl, program, mode);
                 popMatrix();
