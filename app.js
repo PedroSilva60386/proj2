@@ -179,16 +179,16 @@ function setup(shaders)
        
     }
 
-    function LowerArmAndClaw()
+    function TopCraneAndClaw()
     {
         pushMatrix();
-            LowerArm();
+            TopCrane();
         popMatrix();
         multTranslation([0, 0.45, 0]);
         Claw();
     }
 
-    function LowerArm()
+    function TopCrane()
     { 
         pushMatrix();
             multTranslation([0, t2*l2, 0]);
@@ -304,7 +304,7 @@ function setup(shaders)
         //multTranslation([0,0.7,0]);
 
         //  multTranslation([0,0.05,0]);
-        LowerArmAndClaw();
+        TopCraneAndClaw();
     }
 
     function render()
@@ -323,8 +323,8 @@ function setup(shaders)
         loadMatrix(mView);
 
         //Claw();
-        //LowerArm();
-        //LowerArmAndClaw();
+        //TopCrane();
+        //TopCraneAndClaw();
         //BaseCrane(t2,l2);
         RobotArm(t2,l2);
     }
