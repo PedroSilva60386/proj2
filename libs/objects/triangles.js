@@ -3,7 +3,7 @@ export { init, draw };
 import { vec3, normalize, flatten } from '../MV.js';
 
 const vertices = [
-    vec3(+0.0, +0.5, +0.0),     // 0
+    vec3(0, 0.5, 0.5),     // 0
     vec3(+0.5, -0.5, +0.5),     // 1
     vec3(+0.5, -0.5, -0.5),     // 2
     vec3(-0.5, -0.5, -0.5),     // 3

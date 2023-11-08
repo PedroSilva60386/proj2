@@ -12,9 +12,14 @@ var currentState = MODES.ON
 
 let t1 = 10;
 let l1 = 0.05;
+let e1 = 0;
+let t2 = t1;
+let l2 = l1;
+let e2 = 0;
 let t3 = 9;
+let e3 = 0;
+let l3 = l1;
 let t4 = t3/3;
-let l3 = 0.15;
 let ag = -0.01;
 
 function toggleMode(state){
@@ -83,8 +88,10 @@ function setup(shaders)
                 ag = Math.min(0.050, ag + 0.005);
                 break;
             case 'i':
+                t2++;
                 break;
             case 'k':
+                t2--
                 break;
             case 'j':
                 break;
@@ -148,7 +155,7 @@ function setup(shaders)
         gl.uniformMatrix4fv(gl.getUniformLocation(program, name), false, flatten(m));
     }
 
-    function BaseCrane()
+    function BaseCrane(t1,l1)
     {
         let scale = 0.05;
         for(let i = 0; i<t1; i++){
@@ -184,24 +191,24 @@ function setup(shaders)
     function LowerArm()
     { 
         pushMatrix();
-        multScale([0.15, 0.025, 0.15]);
-        multTranslation([0, -10.5, 0]);
-        uploadModelView();
-        CYLINDER.draw(gl, program, mode);
+            multTranslation([0, t2*l2, 0]);
+            multScale([0.15, l2, 0.15]);
+            uploadModelView();
+            CYLINDER.draw(gl, program, mode);
         popMatrix();
         for(let i = 0; i<3; i++){
             if(i == 0){
                 pushMatrix();
-                    multTranslation([0.075, -0.245, 0.375]);
+                    multTranslation([0, t2*l2+0.075, 0.15]);
                     multRotationX(90);
-                    multScale([0.001, 1.65, 0.001]);
+                    multScale([0.001, (t3)*l3+(2*0.05), 0.001]);
                     uploadModelView();
                     CUBE.draw(gl, program, mode);
                 popMatrix();
             }
             if(i == 1){
                 pushMatrix();
-                    multTranslation([-0.075, -0.245, 0.375]);
+                    multTranslation([-0.075, 0, 0.375]);
                     multRotationX(90);
                     multScale([0.001, 1.65, 0.001]);
                     uploadModelView();
@@ -210,7 +217,7 @@ function setup(shaders)
             }
             if(i == 2){
                 pushMatrix();
-                    multTranslation([0, -0.16, 0.375]);
+                    multTranslation([0, 0, 0.375]);
                     multRotationX(90);
                     multScale([0.001, 1.65, 0.001]);
                     uploadModelView();
@@ -233,36 +240,33 @@ function setup(shaders)
     }
 
     function drawTrianglesCrane(){
-        let z = -0.035;
+        let z = 0;
         let i = 0;
         let x = 0;
         while(i!=t3){
             if(i == 0){
                 pushMatrix();
-                    multTranslation([0, -0.195, z]);
-                    multScale([0.15, 0.078, 0.15]);
-                    multRotationX(26);
+                    multTranslation([0, t2*l2+l2, 0]);
+                    multScale([l2, l2, l2]);
                     uploadModelView();
                     TRIANGLES.draw(gl, program, mode);
                 popMatrix();
                 i++;
             }else{
                 pushMatrix();
-                    multTranslation([0, -0.195, z+=l3]);
-                    multScale([0.15, 0.078, 0.15]);
-                    multRotationX(26);
+                    multTranslation([0, t2*l2+l2, z+=l3]);
+                    multScale([l2, l2, l2]);
                     uploadModelView();
                     TRIANGLES.draw(gl, program, mode);
                 popMatrix();
                 i++;
             }
         }
-        z = -0.035;
+        z = 0;
         while(x!=t4){
             pushMatrix();
-                multTranslation([0, -0.195, z-=l3]);
-                multScale([0.15, 0.078, 0.15]);
-                multRotationX(26);
+                multTranslation([0, t2*l2+l2, z-=l3]);
+                multScale([l2, l2, l2]);
                 uploadModelView();
                 TRIANGLES.draw(gl, program, mode);
             popMatrix();
@@ -293,15 +297,15 @@ function setup(shaders)
             popMatrix();
     }
 
-    function RobotArm() 
-    {
+    function RobotArm(t2,l2) 
+    {   
         pushMatrix();
-            BaseCrane();
+            BaseCrane(t2,l2);
         popMatrix();
         multRotationY(rb);
-        multTranslation([0,0.7,0]);
+        //multTranslation([0,0.7,0]);
 
-        multTranslation([0,0.05,0]);
+        //  multTranslation([0,0.05,0]);
         LowerArmAndClaw();
     }
 
@@ -323,8 +327,8 @@ function setup(shaders)
         //Claw();
         //LowerArm();
         //LowerArmAndClaw();
-        //UpperArm();
-        RobotArm();
+        //BaseCrane(t2,l2);
+        RobotArm(t2,l2);
     }
 }
 
