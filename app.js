@@ -6,6 +6,10 @@ import * as CUBE from '../../libs/objects/cube.js';
 import * as CYLINDER from '../../libs/objects/cylinder.js'
 import * as TRIANGLES from '../../libs/objects/triangles.js'
 
+const MODES = { ON: true, OFF: false }
+var currentState = MODES.ON
+
+
 let t1 = 10;
 let l1 = 0.05;
 let t3 = 9;
@@ -13,6 +17,10 @@ let t4 = t3/3;
 let l3 = 0.15;
 let ag = -0.01;
 
+function toggleMode(state){
+    state = !state;
+    return state;
+}
 
 function setup(shaders)
 {
@@ -42,6 +50,16 @@ function setup(shaders)
 
     document.onkeydown = function(event) {
         switch(event.key) {
+            case '0':
+                if (currentState == MODES.ON){
+                    mode = gl.TRIANGLES;
+                    currentState= toggleMode(currentState);
+                }  
+                else{
+                    mode = gl.LINES;
+                    currentState= toggleMode(currentState);
+                }
+                break;
             case '1':
                 // Front view
                 mView = lookAt([0,0.6,1], [0,0.6,0], [0,1,0]);
@@ -59,9 +77,6 @@ function setup(shaders)
                 break;
             case '9':
                 mode = gl.LINES; 
-                break;
-            case '0':
-                mode = gl.TRIANGLES;
                 break;
             case 'p':
                 ag = Math.min(0.050, ag + 0.005);
