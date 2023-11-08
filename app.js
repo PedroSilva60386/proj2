@@ -63,20 +63,18 @@ function setup(shaders)
             case '0':
                 mode = gl.TRIANGLES;
                 break;
-            case 'p':
-                ag = Math.min(0.050, ag + 0.005);
-                break;
-            case 'o':
+            case 'w':
                 ag = Math.max(0, ag - 0.005);
                 break;
-            case 'w':
-                rc = Math.min(120, rc+1);
-                break;
             case 's':
-                rc = Math.max(-120, rc-1);
+                ag = Math.min(0.050, ag + 0.005);
                 break;
             case 'a':
                 rb -= 1;
+                break;
+            case 'i':
+                break;
+            case 'k':
                 break;
             case 'd':
                 rb += 1;
@@ -262,7 +260,7 @@ function setup(shaders)
                 popMatrix();
         // Cylinder 
             pushMatrix();
-                multTranslation([ag, 0, 0]);
+                multTranslation([0,ag, 0]);
                 multScale([0.01, 0.1, 0.01]);
                 multTranslation([0.5, 0.5, 0]);
 
