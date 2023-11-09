@@ -215,7 +215,7 @@ function setup(shaders)
     function TopCrane()
     { 
         pushMatrix();
-            multTranslation([0, (t2+eb*2)*l2, 0]);
+            multTranslation([0, t2*l2+eb, 0]);
             multScale([0.15, l2, 0.15]);
             uploadModelView();
             CYLINDER.draw(gl, program, mode);
@@ -223,7 +223,7 @@ function setup(shaders)
         for(let i = 0; i<3; i++){
             if(i == 0){
                 pushMatrix();
-                    multTranslation([0, (t2+eb)*l2+0.075, t4*l2-0.025]);
+                    multTranslation([0, t2*l2+eb+0.075, t4*l2-0.025]);
                     multRotationX(90);
                     multScale([0.001, t3*l3+t4*l3, 0.001]);
                     uploadModelView();
@@ -232,7 +232,7 @@ function setup(shaders)
             }
             if(i == 1){
                 pushMatrix();
-                    multTranslation([0.025, (t2+eb)*l2+0.025, t4*l2-0.025]);
+                    multTranslation([0.025, t2*l2+eb+0.025, t4*l2-0.025]);
                     multRotationX(90);
                     multScale([0.001, t3*l3+t4*l3, 0.001]);
                     uploadModelView();
@@ -241,7 +241,7 @@ function setup(shaders)
             }
             if(i == 2){
                 pushMatrix();
-                    multTranslation([-0.025, (t2+eb)*l2+0.025, t4*l2-0.025]);
+                    multTranslation([-0.025, t2*l2+eb+0.025, t4*l2-0.025]);
                     multRotationX(90);
                     multScale([0.001, t3*l3+t4*l3, 0.001]);
                     uploadModelView();
@@ -255,7 +255,7 @@ function setup(shaders)
 
     function counterWeight(){
         pushMatrix()
-            multTranslation([0,(t2+eb)*l2,-(t4-1)*l2])
+            multTranslation([0,t2*l2+eb,-(t4-1)*l2])
             multScale([l2, l2, l2]);
             uploadModelView();
             CUBE.draw(gl, program, mode);
@@ -270,7 +270,7 @@ function setup(shaders)
         while(i!=t3){
             if(i == 0){
                 pushMatrix();
-                    multTranslation([0, (t2+eb)*l2+l2, 0]);
+                    multTranslation([0, t2*l2+eb+l2, 0]);
                     multScale([l2, l2, l2]);
                     uploadModelView();
                     TRIANGLES.draw(gl, program, mode);
@@ -278,7 +278,7 @@ function setup(shaders)
                 i++;
             }else{
                 pushMatrix();
-                    multTranslation([0, (t2+eb)*l2+l2, z+=l3]);
+                    multTranslation([0, t2*l2+eb+l2, z+=l3]);
                     multScale([l2, l2, l2]);
                     uploadModelView();
                     TRIANGLES.draw(gl, program, mode);
@@ -289,7 +289,7 @@ function setup(shaders)
         z = 0;
         for(let x = 0; x<=t4;x++){
             pushMatrix();
-                multTranslation([0, (t2+eb)*l2+l2, z-=l3]);
+                multTranslation([0, t2*l2+eb+l2, z-=l3]);
                 multScale([l2, l2, l2]);
                 uploadModelView();
                 TRIANGLES.draw(gl, program, mode);
@@ -303,7 +303,7 @@ function setup(shaders)
         multTranslation([0,0, so]);
         // Base
             pushMatrix();
-                multTranslation([0, -((t2+eb)*l2+0.025), -(t3-1)*l3]);
+                multTranslation([0, -(t2*l2+eb+0.025), -(t3-1)*l3]);
                 multScale([l2, 0.01, l2]);
                 uploadModelView();
                 CUBE.draw(gl, program, mode);
@@ -312,10 +312,10 @@ function setup(shaders)
             pushMatrix();
                 //multTranslation([0,ag, 0]);
                 if(ag == 0){
-                    multTranslation([0,-((t2+eb)*l2), -(t3-1)*l3]);
+                    multTranslation([0,-(t2*l2+eb), -(t3-1)*l3]);
                     multScale([0.001, l2+ag, 0.001]);
                 }else{
-                    multTranslation([0,-((t2+eb)*l2)+0.0025, -(t3-1)*l3]);
+                    multTranslation([0,-(t2*l2+eb)+0.0025, -(t3-1)*l3]);
                     multScale([0.001, l2+ag, 0.001]);
                 }
              
@@ -327,7 +327,7 @@ function setup(shaders)
 
     function RobotArm() 
     {   
-        pushMatrix(t2,l2);
+        pushMatrix();
             BaseCrane(t2,l2);
         popMatrix();
         pushMatrix();
