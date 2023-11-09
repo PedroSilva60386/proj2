@@ -90,7 +90,7 @@ function setup(shaders)
                 ag = Math.min(t2*l2, ag + 0.005);
                 break;
             case 'i':
-                eb = Math.min((t1-1)*l2, eb + 0.005);;
+                eb = Math.min((t1-2)*l2, eb + 0.005);;
                 break;
             case 'k':
                 eb = Math.max(0, eb - 0.005);
@@ -188,6 +188,7 @@ function setup(shaders)
             if(i == 0){
                 pushMatrix()
                     multScale([l2, l2, l2]);
+                    multTranslation([0, eb+l2, 0]);
                     uploadModelView();
                     CUBE.draw(gl, program, mode);
                 popMatrix() 
@@ -309,20 +310,23 @@ function setup(shaders)
                 CUBE.draw(gl, program, mode);
             popMatrix();
         // Cylinder 
-            pushMatrix();
                 //multTranslation([0,ag, 0]);
                 if(ag == 0){
-                    multTranslation([0,-(t2*l2+eb), -(t3-1)*l3]);
-                    multScale([0.001, l2+ag, 0.001]);
+                    pushMatrix();
+                        multTranslation([0,-(t2*l2+eb), -(t3-1)*l3]);
+                        multScale([0.001, l2+ag, 0.001]);
+                        uploadModelView();
+                        CYLINDER.draw(gl, program, mode);
+                    popMatrix();
                 }else{
-                    multTranslation([0,-(t2*l2+eb)+0.0025, -(t3-1)*l3]);
-                    multScale([0.001, l2+ag, 0.001]);
+                    pushMatrix();
+                        multTranslation([0,-(t2*l2+eb), -(t3-1)*l3]);
+                        multTranslation([0,((l2+ag)/2)-0.025,0]);
+                        multScale([0.001, l2+ag, 0.001]);
+                        uploadModelView();
+                        CYLINDER.draw(gl, program, mode);
+                    popMatrix();
                 }
-             
-                
-                uploadModelView();
-                CYLINDER.draw(gl, program, mode);
-            popMatrix();
     }
 
     function RobotArm() 
@@ -371,7 +375,6 @@ function setup(shaders)
         //TopCraneAndClaw();
         //BaseCrane(t2,l2);
         RobotArm(t2,l2);
-
         DoFloor();
 
     }
