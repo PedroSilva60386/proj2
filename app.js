@@ -94,14 +94,15 @@ function setup(shaders)
                 t2--
                 break;
             case 'j':
-                break;
-            case 'l':
-                break;
-            case 'a':
                 rb -= 1;
                 break;
-            case 'd':
+            case 'l':
                 rb += 1;
+                break;
+            case 'a':
+                s
+                break;
+            case 'd':
                 break;
             case 'ArrowLeft':
                 break;
@@ -120,7 +121,7 @@ function setup(shaders)
         }
     }
 
-    gl.clearColor(0.3, 0.3, 0.3, 1.0);
+    gl.clearColor(0, 0, 0, 1.0);
     gl.enable(gl.DEPTH_TEST);   // Enables Z-buffer depth test
 
     TRIANGLES.init(gl);
@@ -311,6 +312,12 @@ function setup(shaders)
         TopCraneAndClaw();
     }
 
+    function DoFloor(){
+            multScale([4,0.01,6]);
+            uploadModelView();
+            CUBE.draw(gl, program, mode);
+    }
+
     function render()
     {
         window.requestAnimationFrame(render);
@@ -331,6 +338,7 @@ function setup(shaders)
         //TopCraneAndClaw();
         //BaseCrane(t2,l2);
         RobotArm(t2,l2);
+        DoFloor();
     }
 }
 
