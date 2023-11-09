@@ -305,17 +305,25 @@ function setup(shaders)
         pushMatrix();
             BaseCrane(t2,l2);
         popMatrix();
-        multRotationY(rb);
-        //multTranslation([0,0.7,0]);
-
-        //  multTranslation([0,0.05,0]);
-        TopCraneAndClaw();
+        pushMatrix();
+            multRotationY(rb);
+            TopCraneAndClaw();
+        popMatrix();
     }
 
     function DoFloor(){
-            multScale([4,0.01,6]);
-            uploadModelView();
-            CUBE.draw(gl, program, mode);
+        for(let i = 0; i < aspect*zoom; i+=0.1){
+            for(let j = 0; j < aspect*zoom; j+=0.1){
+                pushMatrix();
+                    multTranslation([(-aspect*zoom)/2,0,(-aspect*zoom)/2]);
+                    multTranslation([i,0,j]);
+                    multScale([0.1,0,0.1]);
+                    uploadModelView();
+                    CUBE.draw(gl, program, mode);
+                popMatrix();
+            }
+        }
+        
     }
 
     function render()
@@ -327,7 +335,7 @@ function setup(shaders)
         gl.useProgram(program);
         
         // Send the mProjection matrix to the GLSL program
-        mProjection = ortho(-aspect*zoom,aspect*zoom, -zoom, zoom,0.01,3);
+        mProjection = ortho(-aspect*zoom,aspect*zoom, -zoom, zoom,0.01,10);
         uploadProjection(mProjection);
 
         // Load the ModelView matrix with the Worl to Camera (View) matrix
@@ -338,7 +346,9 @@ function setup(shaders)
         //TopCraneAndClaw();
         //BaseCrane(t2,l2);
         RobotArm(t2,l2);
+
         DoFloor();
+
     }
 }
 
