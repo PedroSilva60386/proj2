@@ -331,11 +331,11 @@ function setup(shaders)
     }
 
     function DoFloor(){
-        let adjust = 0.2;
+        let adjust = 0.3;
         for(let i = 0; i < aspect*zoom + adjust; i+=0.1){
             for(let j = 0; j < aspect*zoom + adjust; j+=0.1){
                 pushMatrix();
-                    multTranslation([-adjust/2,0,-adjust/2]);
+                    multTranslation([-adjust/3,0, -adjust/3]);
                     multTranslation([(-aspect*zoom)/2,0,(-aspect*zoom)/2]);
                     multTranslation([i,0,j]);
                     multScale([0.1,0,0.1]);
