@@ -14,7 +14,7 @@ let t1 = 8;
 let l1 = 0.05;
 let e1 = 0;
 let t2 = 10;
-let l2 = l1;
+let l2 = 0.05;
 let e2 = 0;
 let t3 = 12;
 let e3 = 0;
@@ -90,7 +90,7 @@ function setup(shaders)
                 ag = Math.min(t2*l2, ag + 0.005);
                 break;
             case 'i':
-                eb = Math.min((t1-2)*l2, eb + 0.005);;
+                eb = Math.min((t1-1)*l2, eb + 0.005);;
                 break;
             case 'k':
                 eb = Math.max(0, eb - 0.005);
@@ -161,7 +161,7 @@ function setup(shaders)
 
     function BaseCrane(t2,l2)
     {
-        let scale = 0.05;
+        let scale = l1;
         for(let i = 0; i<t1; i++){
             if(i == 0){
                 pushMatrix()
@@ -183,17 +183,8 @@ function setup(shaders)
     }
 
     function drawCraneRest(t2,l2){
-        let scale = 0.05;
+        let scale = l1;
         for(let i = 0; i<t2; i++){
-            if(i == 0){
-                pushMatrix()
-                    multScale([l2, l2, l2]);
-                    multTranslation([0, eb+l2, 0]);
-                    uploadModelView();
-                    CUBE.draw(gl, program, mode);
-                popMatrix() 
-            }
-            else{
                 pushMatrix()
                     multTranslation([0, scale*i, 0]);
                     multTranslation([0, eb, 0]);
@@ -201,7 +192,6 @@ function setup(shaders)
                     uploadModelView();
                     CUBE.draw(gl, program, mode);
                 popMatrix() 
-            }
         }
     }
 
