@@ -1,6 +1,6 @@
 import { buildProgramFromSources, loadShadersFromURLS, setupWebGL } from "../../libs/utils.js";
-import { ortho, lookAt, flatten, rotateX, vec3 } from "../../libs/MV.js";
-import {modelView, loadMatrix, multRotationX, multRotationY, multRotationZ, multScale, multTranslation, popMatrix, pushMatrix} from "../../libs/stack.js";
+import { ortho, lookAt, flatten, rotateX, rotateY, mult } from "../../libs/MV.js";
+import {modelView, loadMatrix, multRotationX, multRotationY, multScale, multTranslation, popMatrix, pushMatrix} from "../../libs/stack.js";
 
 import * as CUBE from '../../libs/objects/cube.js';
 import * as CYLINDER from '../../libs/objects/cylinder.js'
@@ -24,6 +24,8 @@ let ag = 0;
 let so = 0;
 let rb = 0;
 let eb = 0;
+let theta = 32;
+let gamma = 22;
 function toggleMode(state){
     state = !state;
     return state;
@@ -42,13 +44,12 @@ function setup(shaders)
 
     let program = buildProgramFromSources(gl, shaders["shader.vert"], shaders["shader.frag"]);
 
+    let axonometricActive = true;
+
     let mProjection = ortho(-1*aspect,aspect, -1, 1, 0.01, 3);
-    let mView = lookAt([2, 1.2, 1], [0, 0.6, 0], [0, 1, 0]);
+    let mView = mult(mult(lookAt([2, 1.2, 1], [0, 0.6, 0], [0, 1, 0]),rotateX(gamma)),rotateY(theta));
 
     let zoom = 1.0;
-
-    /** Model parameters */
-   
 
     resize_canvas();
     window.addEventListener("resize", resize_canvas);
@@ -68,20 +69,25 @@ function setup(shaders)
             case '1':
                 // Front view
                 mView = lookAt([0,0.6,1], [0,0.6,0], [0,1,0]);
+                axonometricActive = false;
                 break;
             case '2':
                 // Top view
                 mView = lookAt([0,1.6,0],  [0,0.6,0], [-1000,0,-1]);
+                axonometricActive = false;
                 break;
             case '3':
                 // Right view
                 mView = lookAt([1, 0.6, 0.], [0, 0.6, 0], [0, 1, 0]);
+                axonometricActive = false;
                 break;
             case '4':
-                mView = lookAt([2, 1.2, 1], [0, 0.6, 0], [0, 1, 0]);
+                axonometricActive = true;
                 break;
             case 'r':
                 zoom = 1.0;
+                theta = 32;
+                gamma = 22;
                 break;
             case 'w':
                 ag = Math.max(0, ag - 0.005);
@@ -108,12 +114,16 @@ function setup(shaders)
                 so = Math.min(t3*l3-0.15, so + 0.005);
                 break;
             case 'ArrowLeft':
+                theta--;
                 break;
             case 'ArrowRight':
+                theta++;
                 break;
             case 'ArrowUp':
+                gamma++;
                 break;
             case 'ArrowDown':
+                gamma--;
                 break;
         }
     }
@@ -384,6 +394,8 @@ function setup(shaders)
         // Send the mProjection matrix to the GLSL program
         mProjection = ortho(-aspect*zoom,aspect*zoom, -zoom, zoom,0.01,10);
         uploadProjection(mProjection);
+        if(axonometricActive)
+            mView = mult(mult(lookAt([0, 0,1], [0,0,0], [0,1,0]),rotateX(gamma)),rotateY(theta));
 
         // Load the ModelView matrix with the Worl to Camera (View) matrix
         loadMatrix(mView);
