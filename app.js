@@ -115,12 +115,14 @@ function setup(shaders)
                 break;
             case 'ArrowDown':
                 break;
-            case '+':
-                zoom /= 1.1;
-                break;
-            case '-':
-                zoom *= 1.1;
-                break;
+        }
+    }
+
+    document.onwheel = function(event) {
+        if (event.deltaY < 0) {
+            zoom /= 1.1;
+        } else {
+            zoom *= 1.1;
         }
     }
 
