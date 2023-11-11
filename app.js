@@ -331,20 +331,19 @@ function setup(shaders)
     }
 
     function DoFloor(){
-        let adjust = 0.3;
-        for(let i = 0; i < aspect + adjust; i+=0.1){
-            for(let j = 0; j < aspect + adjust; j+=0.1){
+        let numFloor = 1.3
+        let adjust = 0.05;
+        for(let i = 0; i < numFloor; i+=0.1){
+            for(let j = 0; j < numFloor ; j+=0.1){
                 pushMatrix();
-                    multTranslation([-adjust/3,0, -adjust/3]);
-                    multTranslation([(-aspect)/2,0,(-aspect)/2]);
+                    multTranslation([-numFloor/2 + adjust,0,-numFloor/2+ adjust]);
                     multTranslation([i,0,j]);
                     multScale([0.1,0,0.1]);
                     uploadModelView();
                     CUBE.draw(gl, program, mode);
                 popMatrix();
             }
-        }
-        
+        }        
     }
 
     function render()
@@ -362,6 +361,7 @@ function setup(shaders)
         // Load the ModelView matrix with the Worl to Camera (View) matrix
         loadMatrix(mView);
 
+        DoFloor();
         //Claw();
         //TopCrane();
         //TopCraneAndClaw();
@@ -370,7 +370,7 @@ function setup(shaders)
             multTranslation([0,l1/2,0]);
             FullCrane(t2,l2);
         popMatrix()
-        DoFloor();
+        
 
     }
 }
