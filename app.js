@@ -1,5 +1,5 @@
 import { buildProgramFromSources, loadShadersFromURLS, setupWebGL } from "../../libs/utils.js";
-import { ortho, lookAt, flatten, rotateX } from "../../libs/MV.js";
+import { ortho, lookAt, flatten, rotateX, vec3 } from "../../libs/MV.js";
 import {modelView, loadMatrix, multRotationX, multRotationY, multRotationZ, multScale, multTranslation, popMatrix, pushMatrix} from "../../libs/stack.js";
 
 import * as CUBE from '../../libs/objects/cube.js';
@@ -169,6 +169,8 @@ function setup(shaders)
                 pushMatrix()
                     multScale([l1, l1, l1]);
                     uploadModelView();
+                    const cColor = gl.getUniformLocation(program, "vNormal");
+                    gl.uniform3f(cColor, 1.0,1.0,0.0);
                     CUBE.draw(gl, program, mode);
                 popMatrix() 
             }
@@ -199,9 +201,7 @@ function setup(shaders)
 
     function TopCraneAndClaw()
     {
-        pushMatrix();
-            TopCrane();
-        popMatrix();
+        TopCrane();
         Claw();
     }
 
@@ -211,6 +211,8 @@ function setup(shaders)
             multTranslation([0, t2*l1+eb, 0]);
             multScale([0.15, l1, 0.15]);
             uploadModelView();
+            const cColor = gl.getUniformLocation(program, "vNormal");
+            gl.uniform3f(cColor, 0.5,0.5,0.5);
             CYLINDER.draw(gl, program, mode);
         popMatrix();
         for(let i = 0; i<3; i++){
@@ -220,6 +222,8 @@ function setup(shaders)
                     multRotationX(90);
                     multScale([0.001, t3*l3+t4*l3, 0.001]);
                     uploadModelView();
+                    const cColor = gl.getUniformLocation(program, "vNormal");
+                    gl.uniform3f(cColor, 1.0,1.0,0.0);
                     CUBE.draw(gl, program, mode);
                 popMatrix();
             }
@@ -251,6 +255,8 @@ function setup(shaders)
             multTranslation([0,t2*l1+eb,-(t4-1)*l1])
             multScale([l1, l1, l1]);
             uploadModelView();
+            const cColor = gl.getUniformLocation(program, "vNormal");
+            gl.uniform3f(cColor, 1.0,1.0,1.0);
             CUBE.draw(gl, program, mode);
         popMatrix() 
 
@@ -296,26 +302,32 @@ function setup(shaders)
         multTranslation([0,0, so]);
         // Base
             pushMatrix();
-                multTranslation([0, -(t2*l1+eb+0.025), -(t3-1)*l3]);
+                multTranslation([0, -(t2*l1+eb+l1/2.5), -(t3-1)*l3]);
                 multScale([l1, 0.01, l1]);
                 uploadModelView();
+                const cColor = gl.getUniformLocation(program, "vNormal");
+                gl.uniform3f(cColor, 1.0,0.0,0.0);
                 CUBE.draw(gl, program, mode);
             popMatrix();
         // Cylinder 
                 //multTranslation([0,ag, 0]);
                 if(ag == 0){
                     pushMatrix();
-                        multTranslation([0,-(t2*l1+eb), -(t3-1)*l3]);
+                        multTranslation([0,-(t2*l1+eb-(l1/5)), -(t3-1)*l3]);
                         multScale([0.001, l1+ag, 0.001]);
                         uploadModelView();
+                        const cColor = gl.getUniformLocation(program, "vNormal");
+                        gl.uniform3f(cColor, 1.0,1.0,1.0);
                         CYLINDER.draw(gl, program, mode);
                     popMatrix();
                 }else{
                     pushMatrix();
-                        multTranslation([0,-(t2*l1+eb), -(t3-1)*l3]);
+                        multTranslation([0,-(t2*l1+eb-(l1/5)), -(t3-1)*l3]);
                         multTranslation([0,((l1+ag)/2)-0.025,0]);
                         multScale([0.001, l1+ag, 0.001]);
                         uploadModelView();
+                        const cColor = gl.getUniformLocation(program, "vNormal");
+                        gl.uniform3f(cColor, 1.0,1.0,1.0);
                         CYLINDER.draw(gl, program, mode);
                     popMatrix();
                 }
@@ -342,6 +354,8 @@ function setup(shaders)
                     multTranslation([i,0,j]);
                     multScale([0.1,0,0.1]);
                     uploadModelView();
+                    const cColor = gl.getUniformLocation(program, "vNormal");
+                    gl.uniform3f(cColor, 0.3,0.3,0.3);
                     CUBE.draw(gl, program, mode);
                 popMatrix();
             }
