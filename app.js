@@ -90,7 +90,7 @@ function setup(shaders)
                 ag = Math.min(t2*l2, ag + 0.005);
                 break;
             case 'i':
-                eb = Math.min((t1-1)*l2, eb + 0.005);;
+                eb = Math.min((t1-1)*l1, eb + 0.005);;
                 break;
             case 'k':
                 eb = Math.max(0, eb - 0.005);
@@ -331,9 +331,11 @@ function setup(shaders)
     }
 
     function DoFloor(){
-        for(let i = 0; i < aspect*zoom; i+=0.1){
-            for(let j = 0; j < aspect*zoom; j+=0.1){
+        let adjust = 0.2;
+        for(let i = 0; i < aspect*zoom + adjust; i+=0.1){
+            for(let j = 0; j < aspect*zoom + adjust; j+=0.1){
                 pushMatrix();
+                    multTranslation([-adjust/2,0,-adjust/2]);
                     multTranslation([(-aspect*zoom)/2,0,(-aspect*zoom)/2]);
                     multTranslation([i,0,j]);
                     multScale([0.1,0,0.1]);
