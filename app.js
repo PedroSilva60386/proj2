@@ -319,7 +319,7 @@ function setup(shaders)
                 }
     }
 
-    function RobotArm() 
+    function FullCrane() 
     {   
         pushMatrix();
             BaseCrane(t2,l2);
@@ -364,7 +364,10 @@ function setup(shaders)
         //TopCrane();
         //TopCraneAndClaw();
         //BaseCrane(t2,l2);
-        RobotArm(t2,l2);
+        pushMatrix()
+            multTranslation([0,l1/2,0]);
+            FullCrane(t2,l2);
+        popMatrix()
         DoFloor();
 
     }
