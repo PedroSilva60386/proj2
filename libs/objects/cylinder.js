@@ -146,11 +146,6 @@ function draw(gl, program, primitive) {
     var vPosition = gl.getAttribLocation(program, "vPosition");
     gl.vertexAttribPointer(vPosition, 3, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(vPosition);
-    
-    gl.bindBuffer(gl.ARRAY_BUFFER, normals_buffer);
-    var vNormal = gl.getAttribLocation(program, "vNormal");
-    gl.vertexAttribPointer(vNormal, 3, gl.FLOAT, false, 0, 0);
-    gl.enableVertexAttribArray(vNormal);
 
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, primitive == gl.LINES? edges_buffer : faces_buffer);
     gl.drawElements(primitive, primitive == gl.LINES? edges.length : faces.length, gl.UNSIGNED_SHORT, 0);   

@@ -354,8 +354,19 @@ function setup(shaders)
                     multTranslation([i,0,j]);
                     multScale([0.1,0,0.1]);
                     uploadModelView();
-                    const cColor = gl.getUniformLocation(program, "vNormal");
-                    gl.uniform3f(cColor, 0.3,0.3,0.3);
+                    if(((i*10)%2 !== 0 && (j*10)%2 === 0) || ((i*10)%2 === 0 && (j*10)%2 !== 0)){
+                        const cColor = gl.getUniformLocation(program, "vNormal");
+                        gl.uniform3f(cColor, 0.6,0.6,0.6);
+                    }
+                    if(((i*10)%2 === 0 && (j*10)%2 === 0) || ((i*10)%2 !== 0 && (j*10)%2 !== 0)){
+                        const cColor = gl.getUniformLocation(program, "vNormal");
+                        gl.uniform3f(cColor, 1.0,1.0,1.0);
+                    }
+                    if(i==1.2){
+                        //const cColor = gl.getUniformLocation(program, "vNormal");
+                        //gl.uniform3f(cColor, 0.0,1.0,0.0);
+                    }
+                    
                     CUBE.draw(gl, program, mode);
                 popMatrix();
             }
