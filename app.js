@@ -181,7 +181,7 @@ function setup(shaders)
                     uploadModelView();
                     const cColor = gl.getUniformLocation(program, "vNormal");
                     gl.uniform3f(cColor, 1.0,1.0,0.0);
-                    CUBE.draw(gl, program, mode);
+                    CUBE.draw(gl, program, gl.LINES);
                 popMatrix() 
             }
             else{
@@ -189,7 +189,7 @@ function setup(shaders)
                     multTranslation([0, scale*i, 0]);
                     multScale([l1, l1, l1]);
                     uploadModelView();
-                    CUBE.draw(gl, program, mode);
+                    CUBE.draw(gl, program, gl.LINES);
                 popMatrix() 
             }
         }
@@ -204,7 +204,7 @@ function setup(shaders)
                     multTranslation([0, eb, 0]);
                     multScale([l2, l1, l2]);
                     uploadModelView();
-                    CUBE.draw(gl, program, mode);
+                    CUBE.draw(gl, program, gl.LINES);
                 popMatrix() 
         }
     }
@@ -234,7 +234,7 @@ function setup(shaders)
                     uploadModelView();
                     const cColor = gl.getUniformLocation(program, "vNormal");
                     gl.uniform3f(cColor, 1.0,1.0,0.0);
-                    CUBE.draw(gl, program, mode);
+                    CUBE.draw(gl, program, gl.LINES);
                 popMatrix();
             }
             if(i == 1){
@@ -243,7 +243,7 @@ function setup(shaders)
                     multRotationX(90);
                     multScale([0.001, t3*l3+t4*l3, 0.001]);
                     uploadModelView();
-                    CUBE.draw(gl, program, mode);
+                    CUBE.draw(gl, program, gl.LINES);
                 popMatrix();
             }
             if(i == 2){
@@ -252,7 +252,7 @@ function setup(shaders)
                     multRotationX(90);
                     multScale([0.001, t3*l3+t4*l3, 0.001]);
                     uploadModelView();
-                    CUBE.draw(gl, program, mode);
+                    CUBE.draw(gl, program, gl.LINES);
                 popMatrix();
             }
         }
@@ -282,7 +282,7 @@ function setup(shaders)
                     multTranslation([0, t2*l1+eb+l1, 0]);
                     multScale([l1, l1, l1]);
                     uploadModelView();
-                    TRIANGLES.draw(gl, program, mode);
+                    TRIANGLES.draw(gl, program, gl.LINES);
                 popMatrix();
                 i++;
             }else{
@@ -290,7 +290,7 @@ function setup(shaders)
                     multTranslation([0, t2*l1+eb+l1, z+=l3]);
                     multScale([l1, l1, l1]);
                     uploadModelView();
-                    TRIANGLES.draw(gl, program, mode);
+                    TRIANGLES.draw(gl, program, gl.LINES);
                 popMatrix();
                 i++;
             }
@@ -301,7 +301,7 @@ function setup(shaders)
                 multTranslation([0, t2*l1+eb+l1, z-=l3]);
                 multScale([l1, l1, l1]);
                 uploadModelView();
-                TRIANGLES.draw(gl, program, mode);
+                TRIANGLES.draw(gl, program, gl.LINES);
             popMatrix();
         }
 
@@ -328,7 +328,7 @@ function setup(shaders)
                         uploadModelView();
                         const cColor = gl.getUniformLocation(program, "vNormal");
                         gl.uniform3f(cColor, 1.0,1.0,1.0);
-                        CYLINDER.draw(gl, program, mode);
+                        CYLINDER.draw(gl, program, gl.TRIANGLES);
                     popMatrix();
                 }else{
                     pushMatrix();
@@ -338,7 +338,7 @@ function setup(shaders)
                         uploadModelView();
                         const cColor = gl.getUniformLocation(program, "vNormal");
                         gl.uniform3f(cColor, 1.0,1.0,1.0);
-                        CYLINDER.draw(gl, program, mode);
+                        CYLINDER.draw(gl, program, gl.TRIANGLES);
                     popMatrix();
                 }
     }
@@ -362,7 +362,7 @@ function setup(shaders)
                 pushMatrix();
                     multTranslation([-numFloor/2 + adjust,0,-numFloor/2+ adjust]);
                     multTranslation([i,0,j]);
-                    multScale([0.1,0,0.1]);
+                    multScale([0.1,0.01,0.1]);
                     uploadModelView();
                     if(((i*10)%2 !== 0 && (j*10)%2 === 0) || ((i*10)%2 === 0 && (j*10)%2 !== 0)){
                         const cColor = gl.getUniformLocation(program, "vNormal");
@@ -377,7 +377,7 @@ function setup(shaders)
                         //gl.uniform3f(cColor, 0.0,1.0,0.0);
                     }
                     
-                    CUBE.draw(gl, program, mode);
+                    CUBE.draw(gl, program, gl.TRIANGLES);
                 popMatrix();
             }
         }        
