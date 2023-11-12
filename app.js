@@ -114,10 +114,10 @@ function setup(shaders)
                 so = Math.min(t3*l3-0.15, so + 0.005);
                 break;
             case 'ArrowLeft':
-                theta--;
+                theta++;
                 break;
             case 'ArrowRight':
-                theta++;
+                theta--;
                 break;
             case 'ArrowUp':
                 gamma++;
