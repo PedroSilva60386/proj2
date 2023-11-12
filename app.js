@@ -26,6 +26,7 @@ let rb = 0;
 let eb = 0;
 let theta = 32;
 let gamma = 22;
+
 function toggleMode(state){
     state = !state;
     return state;
@@ -280,7 +281,7 @@ function setup(shaders)
             if(i == 0){
                 pushMatrix();
                     multTranslation([0, t2*l1+eb+l1, 0]);
-                    multScale([l1, l1, l1]);
+                    multScale([l3, l3, l3]);
                     uploadModelView();
                     TRIANGLES.draw(gl, program, gl.LINES);
                 popMatrix();
@@ -288,7 +289,7 @@ function setup(shaders)
             }else{
                 pushMatrix();
                     multTranslation([0, t2*l1+eb+l1, z+=l3]);
-                    multScale([l1, l1, l1]);
+                    multScale([l3, l3, l3]);
                     uploadModelView();
                     TRIANGLES.draw(gl, program, gl.LINES);
                 popMatrix();
@@ -299,7 +300,7 @@ function setup(shaders)
         for(let x = 0; x<=t4;x++){
             pushMatrix();
                 multTranslation([0, t2*l1+eb+l1, z-=l3]);
-                multScale([l1, l1, l1]);
+                multScale([l3, l3, l3]);
                 uploadModelView();
                 TRIANGLES.draw(gl, program, gl.LINES);
             popMatrix();
