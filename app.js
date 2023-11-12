@@ -357,6 +357,7 @@ function setup(shaders)
     function DoFloor(){
         let numFloor = 1.3
         let adjust = 0.05;
+        let parity = true;
         for(let i = 0; i < numFloor; i+=0.1){
             for(let j = 0; j < numFloor ; j+=0.1){
                 pushMatrix();
@@ -364,19 +365,16 @@ function setup(shaders)
                     multTranslation([i,0,j]);
                     multScale([0.1,0.01,0.1]);
                     uploadModelView();
-                    if(((i*10)%2 !== 0 && (j*10)%2 === 0) || ((i*10)%2 === 0 && (j*10)%2 !== 0)){
+                    if(parity){
                         const cColor = gl.getUniformLocation(program, "vNormal");
                         gl.uniform3f(cColor, 0.6,0.6,0.6);
+                        parity = false;
                     }
-                    if(((i*10)%2 === 0 && (j*10)%2 === 0) || ((i*10)%2 !== 0 && (j*10)%2 !== 0)){
+                    else{
                         const cColor = gl.getUniformLocation(program, "vNormal");
                         gl.uniform3f(cColor, 1.0,1.0,1.0);
+                        parity = true;
                     }
-                    if(i==1.2){
-                        //const cColor = gl.getUniformLocation(program, "vNormal");
-                        //gl.uniform3f(cColor, 0.0,1.0,0.0);
-                    }
-                    
                     CUBE.draw(gl, program, gl.TRIANGLES);
                 popMatrix();
             }
