@@ -320,7 +320,6 @@ function setup(shaders)
                 CUBE.draw(gl, program, mode);
             popMatrix();
         // Cylinder 
-                //multTranslation([0,ag, 0]);
                 if(ag == 0){
                     pushMatrix();
                         multTranslation([0,-(t2*l1+eb-(l1/5)), -(t3-1)*l3]);
@@ -399,10 +398,8 @@ function setup(shaders)
         loadMatrix(mView);
 
         DoFloor();
-        //Claw();
-        //TopCrane();
-        //TopCraneAndClaw();
-        //BaseCrane(t2,l2);
+    
+        // 0.005 is half the floor height (the scale of the floor cubes is 0.01)
         pushMatrix()
             multTranslation([0,l1/2 + 0.005,0]);
             FullCrane(t2,l2);
