@@ -372,7 +372,7 @@ function setup(shaders)
                     }
                     else{
                         const cColor = gl.getUniformLocation(program, "vNormal");
-                        gl.uniform3f(cColor, 1.0,1.0,1.0);
+                        gl.uniform3f(cColor, 0.2,0.2,0.2);
                         parity = true;
                     }
                     CUBE.draw(gl, program, gl.TRIANGLES);
@@ -404,7 +404,7 @@ function setup(shaders)
         //TopCraneAndClaw();
         //BaseCrane(t2,l2);
         pushMatrix()
-            multTranslation([0,l1/2,0]);
+            multTranslation([0,l1/2 + 0.005,0]);
             FullCrane(t2,l2);
         popMatrix()
         
